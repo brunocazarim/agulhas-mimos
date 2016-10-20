@@ -1,0 +1,14 @@
+body {
+  padding-top: 50px;
+  color: #9D3554;
+  background-color: #F0D2D4;
+}
+
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.btn, .btn-default, .btn-lg {
+  color: #9D3554;
+}
