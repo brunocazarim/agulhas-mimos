@@ -6,10 +6,11 @@
   <h1>{{$product->NAM_PRODUCT}}</h1>
   @endif
 
-  <form action="/products/edit/provide" method="post">
+  <form action="{{action('ProductsController@createOrUpdateProduct')}}" method="post">
     <div class="row">
       <div class="col-sm-6">
-        <input name="prod-id" type="hidden" disabled value="{{is_null($product) ? "" : strval($product->ID_PRODUCT)}}">
+        <span class="input-group-addon" id="product-id">ID</span>
+        <input name="id" type="number" class="form-control" aria-describedby="product-id" disabled value="{{is_null($product) ? "" : $product->ID_PRODUCT}}">
       </div>
       <div class="col-sm-6">
         <input name="_token" type="hidden" value="{{csrf_token()}}">
@@ -46,8 +47,10 @@
           <br>
 
           <div class="form-group">
-            <label for="details">Detalhes</label> @if(is_null($product))
-            <textarea name="details" class="form-control" rows="5" id="product-details"></textarea> @else
+            <label for="details">Detalhes</label>
+            @if(is_null($product))
+            <textarea name="details" class="form-control" rows="5" id="product-details"></textarea>
+            @else
             <textarea name="details" class="form-control" rows="5" id="product-details">{{$product->DETAILS_PRODUCT}}</textarea>            @endif
           </div>
         </div>

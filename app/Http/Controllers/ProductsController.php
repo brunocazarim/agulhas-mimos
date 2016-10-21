@@ -3,7 +3,7 @@
 namespace AgulhasMimos\Http\Controllers;
 
 use Request;
-use AgulhasMimos\Http\Requests;
+use AgulhasMimos\Http\Requests\ProductRequest;
 use AgulhasMimos\Product as Product;
 
 class ProductsController extends Controller
@@ -27,13 +27,13 @@ class ProductsController extends Controller
         }
     }
 
-    public function createOrUpdateProduct()
+    public function createOrUpdateProduct(ProductRequest $request)
     {
-        $id = Request::input('prod-id');
-        $name = Request::input('name');
-        $price = Request::input('price');
-        $quantity = Request::input('qty');
-        $details = Request::input('details');
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $price = $request->input('price');
+        $quantity = $request->input('qty');
+        $details = $request->input('details');
 
         $product = Product::CreateOrUpdate($id, $name, $price, $quantity, $details);
         $product->save();

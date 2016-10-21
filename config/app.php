@@ -177,6 +177,7 @@ return [
         // AgulhasMimos\Providers\BroadcastServiceProvider::class,
         AgulhasMimos\Providers\EventServiceProvider::class,
         AgulhasMimos\Providers\RouteServiceProvider::class,
+        AgulhasMimos\Providers\HelperServiceProvider::class
 
     ],
 

@@ -39,7 +39,7 @@ class Product extends Model
             $product = Product::GetByCode($code);
             if(!is_null($product))
             {
-                // trhow expection
+                throw Exception("Já existe produto com código ".$code);
             }
         }
     }
