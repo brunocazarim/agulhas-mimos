@@ -24,7 +24,16 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'price' => 'required'
+        ];
+    }
+
+        public function messages()
+    {
+        return [
+            'name.required' => 'Campo Nome não pode ser vazio.',
+            'price.required' => 'Campo Preço não pode ser vazio.'
         ];
     }
 }

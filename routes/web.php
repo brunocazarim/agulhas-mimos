@@ -22,3 +22,6 @@ Route::get('/products/edit/{id}', 'ProductsController@getProduct')->where('id', 
 Route::post('/products/edit/provide', 'ProductsController@createOrUpdateProduct');
 
 Route::get('/products/delete', 'ProductsController@deleteProduct');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

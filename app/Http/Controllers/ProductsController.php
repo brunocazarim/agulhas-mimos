@@ -29,6 +29,7 @@ class ProductsController extends Controller
 
     public function createOrUpdateProduct(ProductRequest $request)
     {
+        // TODO: não está trazendo o id para fazer update de produtos
         $id = $request->input('id');
         $name = $request->input('name');
         $price = $request->input('price');
@@ -48,7 +49,7 @@ class ProductsController extends Controller
         $productName = $product->NAM_PRODUCT;
         $product->deleteProduct();
 
-        // TODO: Como fazer par exibir mensagem de exclusão, assim como a mensagem de inserção, é preciso diferenciar as duas
+        // TODO: Como fazer para exibir mensagem de exclusão, assim como a mensagem de inserção, é preciso diferenciar as duas
         return redirect()->action('ProductsController@listAllProducts');
     }
 }

@@ -4,59 +4,82 @@
   <h1>Novo Produto</h1>
   @else
   <h1>{{$product->NAM_PRODUCT}}</h1>
+  @endif 
+  
+  @if(count($errors) > 0)
+  <div class="alert alert-info">
+    <ul>
+      @foreach($errors->all as $error)
+      <li>{{$error}}</li>
+      @endforeach
+    </ul>
+  </div>
   @endif
 
-  <form action="{{action('ProductsController@createOrUpdateProduct')}}" method="post">
+  <form class="form-horizontal" action="{{action('ProductsController@createOrUpdateProduct')}}" method="post" enctype="multipart/form-data">
     <div class="row">
       <div class="col-sm-6">
-        <span class="input-group-addon" id="product-id">ID</span>
-        <input name="id" type="number" class="form-control" aria-describedby="product-id" disabled value="{{is_null($product) ? "" : $product->ID_PRODUCT}}">
+        <input name="id" type="hidden" class="form-control" aria-describedby="product-id" disabled value="{{is_null($product) ? "" : $product->ID_PRODUCT}}">
       </div>
       <div class="col-sm-6">
         <input name="_token" type="hidden" value="{{csrf_token()}}">
       </div>
 
       <div class="row">
-        <div class="col-sm-7">
-          <div class="input-group">
-            <span class="input-group-addon" id="product-code">Cód. Produto</span>
-            <input type="text" class="form-control" aria-describedby="product-code" disabled value="{{is_null($product) ? "" : $product->COD_PRODUCT}}">
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label for="product-code" class="col-sm-3 control-label">Cód. Produto</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="product-code" disabled value="{{is_null($product) ? "" : $product->COD_PRODUCT}}">
+            </div>
           </div>
-
-          <br>
-
-          <div class="input-group">
-            <span class="input-group-addon" id="product-name">Nome</span>
-            <input name="name" type="text" class="form-control" aria-describedby="product-name" autofocus value="{{is_null($product) ? "" : $product->NAM_PRODUCT}}">
-          </div>
-
-          <br>
-
-          <div class="input-group">
-            <span class="input-group-addon" id="product-price">Preço</span>
-            <input name="price" type="number" min="0" step="0.01" class="form-control" aria-describedby="product-price" value="{{is_null($product) ? "" : $product->PRICE}}">
-          </div>
-
-          <br>
-
-          <div class="input-group">
-            <span class="input-group-addon" id="product-qty">Quantidade</span>
-            <input name="qty" type="text" class="form-control" aria-describedby="product-qty" value="">
-          </div>
-
-          <br>
 
           <div class="form-group">
-            <label for="details">Detalhes</label>
-            @if(is_null($product))
-            <textarea name="details" class="form-control" rows="5" id="product-details"></textarea>
-            @else
-            <textarea name="details" class="form-control" rows="5" id="product-details">{{$product->DETAILS_PRODUCT}}</textarea>            @endif
+            <label for="product-name" class="col-sm-3 control-label">Nome</label>
+            <div class="col-sm-9">
+              <input name="name" type="text" class="form-control" id="product-name" autofocus value="{{is_null($product) ? "" : $product->NAM_PRODUCT}}">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="product-price" class="col-sm-3 control-label">Preço</label>
+            <div class="col-sm-9">
+              <input name="price" type="number" min="0" step="0.01" class="form-control" id="product-price" value="{{is_null($product) ? "" : $product->PRICE}}">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="product-qty" class="col-sm-3 control-label">Quantidade</label>
+            <div class="col-sm-9">
+              <input name="qty" type="text" class="form-control" id="product-qty" value="">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="product-details" class="col-sm-3 control-label">Detalhes</label>
+            <div class="col-sm-9">
+              @if(is_null($product))
+              <textarea name="details" class="form-control" rows="5" id="product-details"></textarea> @else
+              <textarea name="details" class="form-control" rows="5" id="product-details">{{$product->DETAILS_PRODUCT}}</textarea>              @endif
+            </div>
           </div>
         </div>
 
-        <div class="col-sm-5">
-          <p>Imagens</p>
+        <div class="col-sm-7">
+          <div class="form-group">
+            <label for="product-img1" class="col-sm-3 control-label">Imagens</label>
+            <div class="col-sm-9">
+              <input name="img1" type="file" class="form-control" id="product-img1" value="">
+              <br>
+              <input name="img2" type="file" class="form-control" id="product-img2" value="">
+              <br>
+              <input name="img3" type="file" class="form-control" id="product-img3" value="">
+              <br>
+              <input name="img4" type="file" class="form-control" id="product-img4" value="">
+              <br>
+              <input name="img5" type="file" class="form-control" id="product-img5" value="">
+            </div>
+          </div>
         </div>
       </div>
 
@@ -64,5 +87,5 @@
         <button type="submit" class="btn btn-default btn-lg active">Salvar</button>
       </div>
   </form>
-  </div>
-  @stop
+</div>
+@stop

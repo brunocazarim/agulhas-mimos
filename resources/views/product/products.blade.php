@@ -24,7 +24,7 @@
                 <td>
                     <form method="delete">
                         <a href="/products/delete?id={{$product->ID_PRODUCT}}">
-                            <span class="glyphicon glyphicon-remove"></span>
+                            <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </form>
                 </td>
