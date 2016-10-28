@@ -1,6 +1,6 @@
 <!DOCTYPE html> @extends('layout') @section('content')
-<div class="starter-template">
-    <h1>Produtos</h1>
+<div class="container-fluid">
+    <h1 class="text-center">Produtos</h1>
     @if(old('name'))
     <div class="row">
         <div class="alert alert-success" role="alert">
@@ -33,7 +33,7 @@
         </table>
     </div>
 
-    <div class="row">
+    <div class="row text-center">
         <form action="/products/edit/{{0}}">
             <button type="submit" class="btn btn-default btn-lg active">Novo</button>
         </form>

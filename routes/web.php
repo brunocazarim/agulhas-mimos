@@ -15,6 +15,10 @@ Route::get('/', function(){
     return view('index');
 });
 
+Route::get('/inicio', function(){
+    return view('inicio');
+});
+
 Route::get('/products', 'ProductsController@listAllProducts');
 
 Route::get('/products/edit/{id}', 'ProductsController@getProduct')->where('id', '[0-9]+');
@@ -22,6 +26,9 @@ Route::get('/products/edit/{id}', 'ProductsController@getProduct')->where('id', 
 Route::post('/products/edit/provide', 'ProductsController@createOrUpdateProduct');
 
 Route::get('/products/delete', 'ProductsController@deleteProduct');
+
+Route::get('/groups', 'ProductsController@listAllProductGroups');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
