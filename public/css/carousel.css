@@ -153,6 +153,63 @@ body {
   letter-spacing: -1px;
 }
 
+/* CUSTOMIZE LOGIN DROPDOWN
+-------------------------------------------------- */
+#login-dp{
+    min-width: 300px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color: #80ff80;
+}
+#login-dp .help-block{
+    font-size:12px    
+}
+#login-dp .bottom{
+    background-color: #80ff80;
+    clear:both;
+    padding:14px;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+
+
+/* CUSTOMIZE BUTTONS
+-------------------------------------------------- */
+
+.btn-login {
+  color: #993300;
+  background-color: #fff;
+  border-color: #fff;
+}
+.btn-login:hover {
+  color: #331100;
+  background-color: #b3b3b3;
+  border-color: #b3b3b3;
+}
+.btn-custom {
+  color: #993300;
+  background-color: #fff;
+  border-color: #fff;
+}
+.btn-custom:hover {
+  color: #331100;
+  background-color: #b3b3b3;
+  border-color: #b3b3b3;
+}
+
+/* CUSTOMIZE LINKS
+-------------------------------------------------- */
+
+a {
+  color: #996600;
+}
+a:hover {
+  color: #664400;
+}
+a:focus {
+  color: #664400;
+}
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
@@ -192,4 +249,15 @@ body {
   .featurette-heading {
     margin-top: 120px;
   }
+}
+
+@media(max-width:768px){
+    #login-dp{
+        background-color: inherit;
+        color: #fff;
+    }
+    #login-dp .bottom{
+        background-color: inherit;
+        border-top:0 none;
+    }
 }

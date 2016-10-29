@@ -13,7 +13,7 @@ class CreateProductGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('PROUCT_GROUPS', function (Blueprint $table) {
+        Schema::create('PRODUCT_GROUPS', function (Blueprint $table) {
             $table->increments('ID_GROUP');
             $table->string('NAM_GROUP');
             $table->string('DES_GROUP');

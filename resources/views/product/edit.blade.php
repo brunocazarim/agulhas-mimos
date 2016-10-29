@@ -81,7 +81,7 @@
       </div>
     </div>
     <div class="row text-center">
-      <button type="submit" class="btn btn-default btn-lg active">Salvar</button>
+      <button type="submit" class="btn btn-custom btn-lg active">Salvar</button>
     </div>
   </form>
 </div>

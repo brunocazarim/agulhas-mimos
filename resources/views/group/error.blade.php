@@ -2,6 +2,6 @@
 @extends('layout')
 @section('content')
 <div class="container">
-    <h1>Produto não encontrado :(</h1>
+    <h1>Grupo não encontrado :(</h1>
 </div>
 @stop

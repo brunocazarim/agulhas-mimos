@@ -35,7 +35,8 @@
       <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+              aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -59,10 +60,6 @@
                   <li><a href="#">Trabalho</a></li>
                   <li><a href="#">Organizadores</a></li>
                   <li><a href="#">Infantil</a></li>
-                  <!-- li role="separator" class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li -->
                 </ul>
               </li>
               <li><a href="#about">Comprinhas</a></li>
@@ -71,26 +68,56 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administração<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="{{action('ProductsController@listAllProducts')}}">Cadastro Produtos</a></li>
-                  <li><a href="#">Grupos de Produtos</a></li>
+                  <li><a href="{{action('ProductsController@listAllProductGroups')}}">Grupos de Produtos</a></li>
                   <li><a href="#">Vendas</a></li>
                 </ul>
               </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right" id="login-navbar">
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-o fa-lg" aria-hidden="true"></i>    Entrar</a>
+                <ul id="login-dp" class="dropdown-menu">
+                  <li>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                          <div class="form-group">
+                            <input type="email" class="form-control" id="email-addr" placeholder="Email" required>
+                          </div>
+                          <div class="form-group">
+                            <input type="password" class="form-control" id="pass" placeholder="Senha" required>
+                            <div class="help-block text-right"><a href="#">Esqueceu a senha?</a></div>
+                          </div>
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-login btn-block">Entrar</button>
+                          </div>
+                          <div class="checkbox">
+                            <label>
+                              <input type="checkbox"> Mantenha me conectado(a)
+                            </label>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="bottom text-center">
+                        Novo(a)? <a href="#"><b>Junte-se a nós!</b></a>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
           </div>
         </div>
       </nav>
     </div>
   </div>
-
   <div class="content">
-  @yield('content')
+    @yield('content')
   </div>
-
-    <!-- FOOTER -->
-    <footer>
-      <p class="pull-right"><a href="#">Back to top</a></p>
-      <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-    </footer>
+  <!-- FOOTER -->
+  <footer>
+    <p class="pull-right"><a href="#">Back to top</a></p>
+    <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+  </footer>
   </div>
   <!-- /.container -->
   <!-- Bootstrap core JavaScript

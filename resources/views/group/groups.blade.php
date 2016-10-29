@@ -1,6 +1,6 @@
 <!DOCTYPE html> @extends('layout') @section('content')
-<div class="container-fluid">
-    <h1 class="text-center">Produtos</h1>
+<div class="container">
+    <h1 class="text-center">Grupos de Produtos</h1>
     @if(old('name'))
     <div class="row">
         <div class="alert alert-success" role="alert">
@@ -10,20 +10,18 @@
     @endif
     <div class="row">
         <table class="table table-striped">
-            @foreach ($products as $product)
+            @foreach ($groups as $group)
             <tr class="lead">
-                <td>{{$product->COD_PRODUCT}}</td>
-                <td>{{$product->NAM_PRODUCT}}</td>
-                <td>{{$product->DETAILS_PRODUCT}}</td>
-                <td>{{$product->PRICE}}</td>
+                <td>{{$group->NAM_GROUP}}</td>
+                <td>{{$group->DES_GROUP}}</td>
                 <td>
-                    <a href="/products/edit/{{$product->ID_PRODUCT}}">
+                    <a href="/groups/edit/{{$group->ID_GROUP}}">
                         <span class="glyphicon glyphicon-edit"></span>
                     </a>
                 </td>
                 <td>
                     <form method="delete">
-                        <a href="/products/delete?id={{$product->ID_PRODUCT}}">
+                        <a href="/groups/delete?id={{$group->ID_GROUP}}">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </form>
@@ -34,7 +32,7 @@
     </div>
 
     <div class="row text-center">
-        <form action="/products/edit/{{0}}">
+        <form action="/groups/edit/{{0}}">
             <button type="submit" class="btn btn-custom btn-lg active">Novo</button>
         </form>
     </div>
