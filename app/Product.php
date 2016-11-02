@@ -11,7 +11,7 @@ class Product extends Model
     protected $primaryKey = 'ID_PRODUCT';
     public $timestamps = false;
 
-    public function __construct($attributes = array(), $name = null, $details = null, $price = null)
+    public function __construct($attributes = array(), $name = null, $group = null, $details = null, $price = null)
     {
         parent::__construct($attributes);
         if(!is_null($name) && !empty($name))
@@ -19,13 +19,14 @@ class Product extends Model
             $code = Product::GenerateCode();
             $this->validateCode($code);
             $this->COD_PRODUCT = $code;
-            $this->updateProduct($name, $details, $price);
+            $this->updateProduct($name, $group, $details, $price);
         }
     }
 
-    private function updateProduct($name, $details, $price)
+    private function updateProduct($name, $group, $details, $price)
     {
         $this->NAM_PRODUCT = $name;
+        $this->ID_GROUP = $group;
         $this->DETAILS_PRODUCT = $details;
         $this->PRICE = is_null($price) ? 0.00 : $price;
         $this->IS_ACTIVE = true;
@@ -65,17 +66,17 @@ class Product extends Model
         return Product::all();
     }
 
-    public static function CreateOrUpdate($id, $name, $price, $quantity, $details)
+    public static function CreateOrUpdate($id, $name, $group, $price, $quantity, $details)
     {
         $product = Product::GetById($id);
 
         if(is_null($product))
         {
-            $product = new Product($attributes = array(), $name, $details, $price);
+            $product = new Product($attributes = array(), $name, $group, $details, $price);
         }
         else
         {
-            $product->updateProduct($name, $details, $price);
+            $product->updateProduct($name, $group, $details, $price);
         }
         return $product;
     }

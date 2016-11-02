@@ -15,7 +15,7 @@ class CreateProductGroupsTable extends Migration
     {
         Schema::create('PRODUCT_GROUPS', function (Blueprint $table) {
             $table->increments('ID_GROUP');
-            $table->string('NAM_GROUP');
+            $table->string('NAM_GROUP')->unique();
             $table->string('DES_GROUP');
             $table->boolean('IS_ACTIVE');
             $table->dateTime('DT_LAST_MODIFICATION');

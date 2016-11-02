@@ -25,22 +25,23 @@ class ProductsController extends Controller
         }
         else
         {
-            return view('product.edit')->with('product', $product);
+            $groups = ProductGroup::ListAll();
+            return view('product.edit')->with(['product' => $product, 'groups' => $groups]);
         }
     }
 
     public function createOrUpdateProduct(ProductRequest $request)
     {
-        // TODO: não está trazendo o id para fazer update de produtos
         $id = $request->input('id');
         $name = $request->input('name');
+        $group = $request->input('group');
         $price = $request->input('price');
         $quantity = $request->input('qty');
         $details = $request->input('details');
 
-        $product = Product::CreateOrUpdate($id, $name, $price, $quantity, $details);
+        $product = Product::CreateOrUpdate($id, $name, $group, $price, $quantity, $details);
         $product->save();
-
+        // TODO: Ao fazer update mensagem diz que novo produto foi adicionado
         return redirect()->action('ProductsController@listAllProducts')->withInput(Request::only('name'));
     }
 
@@ -76,7 +77,6 @@ class ProductsController extends Controller
 
     public function createOrUpdateProductGroup(ProductGroupRequest $request)
     {
-        // TODO: não está trazendo o id para fazer update de produtos
         $id = $request->input('id');
         $name = $request->input('name');
         $description = $request->input('description');

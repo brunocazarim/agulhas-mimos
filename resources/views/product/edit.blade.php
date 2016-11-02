@@ -39,7 +39,12 @@
         <div class="form-group">
           <label for="product-group" class="col-sm-3 control-label">Grupo</label>
           <div class="col-sm-9">
-            <input name="group" type="text" class="form-control" id="product-group" autofocus value="">
+            <select name="group" class="form-control" id="product-group">
+            @foreach ($groups as $group)
+              <option value="{{$group->ID_GROUP}}" {{is_null($product) ? '' : $product->ID_GROUP == $group->ID_GROUP ? 'selected' : ''}}>{{$group->NAM_GROUP}}</option>
+            @endforeach
+            </select>
+            <!-- input name="group" type="text" class="form-control" id="product-group" value="" -->
           </div>
         </div>
         <div class="form-group">

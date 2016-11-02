@@ -70,7 +70,7 @@ class ProductGroup extends Model
         }
         else
         {
-            $group->updateProduct($name, $description);
+            $group->updateGroup($description);
         }
         return $group;
     }

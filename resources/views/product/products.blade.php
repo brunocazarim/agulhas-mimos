@@ -1,5 +1,5 @@
 <!DOCTYPE html> @extends('layout') @section('content')
-<div class="container-fluid">
+<div class="container">
     <h1 class="text-center">Produtos</h1>
     @if(old('name'))
     <div class="row">

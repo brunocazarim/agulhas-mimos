@@ -24,7 +24,14 @@ class ProductGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required'
+        ];
+    }
+
+        public function messages()
+    {
+        return [
+            'name.required' => 'Nome não pode ser vazio.'
         ];
     }
 }

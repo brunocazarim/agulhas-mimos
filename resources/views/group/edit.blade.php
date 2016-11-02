@@ -1,5 +1,5 @@
 <!DOCTYPE html> @extends('layout') @section('content')
-<div class="container-fluid">
+<div class="container">
   @if(is_null($group))
   <h1 class="text-center">Novo Grupo</h1>
   @else
@@ -16,7 +16,7 @@
   <form class="form-horizontal" action="{{action('ProductsController@createOrUpdateProductGroup')}}" method="post" enctype="multipart/form-data">
     <div class="row">
       <div class="col-sm-6">
-        <input name="id" type="hidden" value="{{is_null($group) ? " " : $group->ID_GROUP}}">
+        <input name="id" type="hidden" value="{{is_null($group) ? "" : $group->ID_GROUP}}">
       </div>
       <div class="col-sm-6">
         <input name="_token" type="hidden" value="{{csrf_token()}}">
@@ -27,7 +27,7 @@
         <div class="form-group">
           <label for="group-name" class="col-sm-3 control-label">Nome</label>
           <div class="col-sm-9">
-            <input type="text" class="form-control" id="group-name" disabled value="{{is_null($group) ? "" : $group->NAM_GROUP}}">
+            <input name="name" type="text" class="form-control" id="group-name" value="{{is_null($group) ? "" : $group->NAM_GROUP}}">
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@
         <div class="form-group">
           <label for="group-desc" class="col-sm-3 control-label">Descrição</label>
           <div class="col-sm-9">
-            <input name="description" type="text" class="form-control" id="group-desc" autofocus value="{{is_null($group) ? "" : $group->DES_GROUP}}">
+            <input name="description" type="text" class="form-control" id="group-desc" value="{{is_null($group) ? "" : $group->DES_GROUP}}">
           </div>
         </div>
       </div>
@@ -45,4 +45,14 @@
     </div>
   </form>
 </div>
-@stop
+<script>
+$(document).ready(function(){
+  if($("#group-name").attr("value").trim()){
+    $("#group-name").prop('disabled', true);
+    $("#group-desc").focus();
+  }
+  else{
+    $("#group-name").focus();
+  }
+});
+</script> @stop

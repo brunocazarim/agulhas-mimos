@@ -25,15 +25,17 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'group' => 'required'
         ];
     }
 
         public function messages()
     {
         return [
-            'name.required' => 'Campo Nome não pode ser vazio.',
-            'price.required' => 'Campo Preço não pode ser vazio.'
+            'name.required' => 'Nome não pode ser vazio.',
+            'price.required' => 'Preço não pode ser vazio.',
+            'group.required' => 'Grupo não pode ser vazio.'
         ];
     }
 }
