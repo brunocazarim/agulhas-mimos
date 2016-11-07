@@ -4,9 +4,9 @@ namespace AgulhasMimos\Http\Controllers;
 
 use Request;
 use AgulhasMimos\Http\Requests\ProductRequest;
-use AgulhasMimos\Http\Requests\ProductGroupRequest;
+use AgulhasMimos\Http\Requests\ProductCategoryRequest;
 use AgulhasMimos\Product as Product;
-use AgulhasMimos\ProductGroup as ProductGroup;
+use AgulhasMimos\ProductCategory as ProductCategory;
 
 class ProductsController extends Controller
 {
@@ -25,8 +25,8 @@ class ProductsController extends Controller
         }
         else
         {
-            $groups = ProductGroup::ListAll();
-            return view('product.edit')->with(['product' => $product, 'groups' => $groups]);
+            $categories = ProductCategory::ListAll();
+            return view('product.edit')->with(['product' => $product, 'categories' => $categories]);
         }
     }
 
@@ -34,12 +34,12 @@ class ProductsController extends Controller
     {
         $id = $request->input('id');
         $name = $request->input('name');
-        $group = $request->input('group');
+        $category = $request->input('category');
         $price = $request->input('price');
         $quantity = $request->input('qty');
-        $details = $request->input('details');
+        $description = $request->input('description');
 
-        $product = Product::CreateOrUpdate($id, $name, $group, $price, $quantity, $details);
+        $product = Product::CreateOrUpdate($id, $name, $category, $price, $quantity, $description);
         $product->save();
         // TODO: Ao fazer update mensagem diz que novo produto foi adicionado
         return redirect()->action('ProductsController@listAllProducts')->withInput(Request::only('name'));
@@ -49,52 +49,50 @@ class ProductsController extends Controller
     {
         $id = Request::input('id');
         $product = Product::GetById($id);
-        $productName = $product->NAM_PRODUCT;
         $product->deleteProduct();
 
         // TODO: Como fazer para exibir mensagem de exclusão, assim como a mensagem de inserção, é preciso diferenciar as duas
         return redirect()->action('ProductsController@listAllProducts');
     }
 
-    public function listAllProductGroups()
+    public function listAllCategories()
     {
-        $groups = ProductGroup::ListAll();
-        return view('group.groups')->with('groups', $groups);
+        $categories = ProductCategory::ListAll();
+        return view('category.categories')->with('categories', $categories);
     }
 
-    public function getProductGroup($id)
+    public function getCategory($id)
     {
-        $group = ProductGroup::GetById($id);
-        if(is_null($group) && $id != 0)
+        $category = ProductCategory::GetById($id);
+        if(is_null($category) && $id != 0)
         {
-            return view('group.error');
+            return view('category.error');
         }
         else
         {
-            return view('group.edit')->with('group', $group);
+            return view('category.edit')->with('category', $category);
         }
     }
 
-    public function createOrUpdateProductGroup(ProductGroupRequest $request)
+    public function createOrUpdateCategory(ProductCategoryRequest $request)
     {
         $id = $request->input('id');
         $name = $request->input('name');
         $description = $request->input('description');
 
-        $group = ProductGroup::CreateOrUpdate($id, $name, $description);
-        $group->save();
+        $category = ProductCategory::CreateOrUpdate($id, $name, $description);
+        $category->save();
 
-        return redirect()->action('ProductsController@listAllProductGroups')->withInput(Request::only('name'));
+        return redirect()->action('ProductsController@listAllCategories')->withInput(Request::only('name'));
     }
 
-    public function deleteProductGroup()
+    public function deleteCategory()
     {
         $id = Request::input('id');
-        $group = ProductGroup::GetById($id);
-        $groupName = $product->NAM_GROUP;
-        $group->deleteGroup();
+        $category = ProductCategory::GetById($id);
+        $category->deleteCategory();
 
         // TODO: Como fazer para exibir mensagem de exclusão, assim como a mensagem de inserção, é preciso diferenciar as duas
-        return redirect()->action('ProductsController@listAllProductGroup');
+        return redirect()->action('ProductsController@listAllCategories');
     }
 }

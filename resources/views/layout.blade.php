@@ -25,7 +25,6 @@
     <![endif]-->
   <!-- Custom styles for this template -->
   <link href="../../css/carousel.css" rel="stylesheet">
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 </head>
@@ -67,6 +66,7 @@
               </li>
               <li><a href="#about">Comprinhas</a></li>
               <li><a href="#about">Contato</a></li>
+              @if (!is_null(Auth::user()) && Auth::user()->email == 'bruno.a.cazarim@gmail.com')
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administração<span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -75,30 +75,36 @@
                   <li><a href="#">Vendas</a></li>
                 </ul>
               </li>
+              @endif
             </ul>
             <ul class="nav navbar-nav navbar-right" id="login-navbar">
               @if (Auth::guest())
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-o fa-lg" aria-hidden="true"></i>    Entrar</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>    Entrar</a>
                 <ul id="login-dp" class="dropdown-menu">
                   <li>
                     <div class="row">
                       <div class="col-md-12">
-                        <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-                          <div class="form-group">
-                            <input type="email" class="form-control" id="email-addr" placeholder="Email" required>
+                        <form class="form-group" role="form" method="POST" action="{{ url('/login') }}">
+                          {{ csrf_field() }}
+                          <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                              <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus placeholder="Email">
+                              @if ($errors->has('email'))
+                              <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
+                              @endif
+                          </div>
+                          <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                              <input id="password" type="password" class="form-control" name="password" required placeholder="Senha">
+                              @if ($errors->has('password'))
+                              <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
+                              @endif
+                              <div class="help-block text-right"><a href="{{ url('/password/reset') }}">Esqueceu a senha?</a></div>
                           </div>
                           <div class="form-group">
-                            <input type="password" class="form-control" id="pass" placeholder="Senha" required>
-                            <div class="help-block text-right"><a href="#">Esqueceu a senha?</a></div>
-                          </div>
-                          <div class="form-group">
-                            <button type="submit" class="btn btn-login btn-block">Entrar</button>
+                              <button type="submit" class="btn btn-custom btn-block">Entrar</button>
                           </div>
                           <div class="checkbox">
-                            <label>
-                              <input type="checkbox"> Mantenha me conectado(a)
-                            </label>
+                              <label><input type="checkbox" name="remember"> Matenha-me conectado()</label>
                           </div>
                         </form>
                       </div>
@@ -111,9 +117,16 @@
               </li>
               @else
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-o fa-lg" aria-hidden="true"></i>    {{Auth::user()->name}}</a>
-                <ul id="login-dp" class="dropdown-menu">
-                  <li>Sair</li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>    {{ Auth::user()->name }}</a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="{{ url('/logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                      Sair
+                    </a>
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                    </form>
+                  </li>
                 </ul>
               </li>
               @endif
@@ -136,7 +149,7 @@
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
   <script src="../../css/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/js/app.js"></script>
+  <!-- script src="/js/app.js"></script -->
   <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <!-- script src="../../assets/js/ie10-viewport-bug-workaround.js"></script -->

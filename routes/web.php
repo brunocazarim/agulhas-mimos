@@ -21,11 +21,11 @@ Route::get('/products/edit/{id}', 'ProductsController@getProduct')->where('id', 
 Route::post('/products/edit/provide', 'ProductsController@createOrUpdateProduct');
 Route::get('/products/delete', 'ProductsController@deleteProduct');
 
-// Product Group routes
-Route::get('/groups', 'ProductsController@listAllProductGroups');
-Route::get('/groups/edit/{id}', 'ProductsController@getProductGroup')->where('id', '[0-9]+');
-Route::post('/groups/edit/provide', 'ProductsController@createOrUpdateProductGroup');
-Route::get('/groups/delete', 'ProductsController@deleteProductGroup');
+// Categories routes
+Route::get('/categories', 'ProductsController@listAllCategories');
+Route::get('/categories/edit/{id}', 'ProductsController@getCategory')->where('id', '[0-9]+');
+Route::post('/categories/edit/provide', 'ProductsController@createOrUpdateCategory');
+Route::get('/categories/delete', 'ProductsController@deleteCategory');
 
 // Auth
 Auth::routes();

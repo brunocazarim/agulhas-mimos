@@ -8,29 +8,31 @@ use AgulhasMimos\Util\Util as Util;
 
 class Product extends Model
 {
-    protected $primaryKey = 'ID_PRODUCT';
     public $timestamps = false;
 
-    public function __construct($attributes = array(), $name = null, $group = null, $details = null, $price = null)
+    public function __construct($attributes = array(), $name = null, $category = null, $description = null, 
+        $price = null, $quantity = null)
     {
         parent::__construct($attributes);
         if(!is_null($name) && !empty($name))
         {
             $code = Product::GenerateCode();
             $this->validateCode($code);
-            $this->COD_PRODUCT = $code;
-            $this->updateProduct($name, $group, $details, $price);
+            $this->code = $code;
+            $this->updateProduct($name, $description, $price);
         }
     }
 
-    private function updateProduct($name, $group, $details, $price)
+    private function updateProduct($name, $category, $description, $price, $quantity)
     {
-        $this->NAM_PRODUCT = $name;
-        $this->ID_GROUP = $group;
-        $this->DETAILS_PRODUCT = $details;
-        $this->PRICE = is_null($price) ? 0.00 : $price;
-        $this->IS_ACTIVE = true;
-        $this->DT_LAST_MODIFICATION = date('Y-m-d H:i:s');
+        $this->name = $name;
+        $this->description = $description;
+        $this->price = is_null($price) ? 0.00 : $price;
+        $this->dt_last_modification = date('Y-m-d H:i:s');
+        // mais três métodos:
+        // updateCategory($category);
+        // updateSpecifications();
+        // updateInventory($quantity);
     }
 
     private function validateCode($code)
@@ -57,7 +59,7 @@ class Product extends Model
     {
         if(!is_null($code) && !empty($code))
         {
-            return Product::where('COD_PRODUCT', $code)->first();
+            return Product::where('code', $code)->first();
         }
     }
 
@@ -66,17 +68,17 @@ class Product extends Model
         return Product::all();
     }
 
-    public static function CreateOrUpdate($id, $name, $group, $price, $quantity, $details)
+    public static function CreateOrUpdate($id, $name, $category, $price, $quantity, $description)
     {
         $product = Product::GetById($id);
 
         if(is_null($product))
         {
-            $product = new Product($attributes = array(), $name, $group, $details, $price);
+            $product = new Product($attributes = array(), $name, $category, $description, $price);
         }
         else
         {
-            $product->updateProduct($name, $group, $details, $price);
+            $product->updateProduct($name, $category, $description, $price, $quantity);
         }
         return $product;
     }
@@ -88,14 +90,14 @@ class Product extends Model
 
     public static function GenerateCode()
     {
-        $lastProduct = Product::orderBy('COD_PRODUCT', 'desc')->first();
+        $lastProduct = Product::orderBy('code', 'desc')->first();
         if(is_null($lastProduct))
         {
             return "0000000001";
         }
         else
         {
-            $lastCode = intval($lastProduct->COD_PRODUCT);
+            $lastCode = intval($lastProduct->code);
             $newCode = $lastCode + 1;
             return Util::FillWithLeftZeros(strval($newCode), 10);
         }

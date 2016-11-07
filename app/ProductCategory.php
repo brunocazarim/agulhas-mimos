@@ -4,9 +4,8 @@ namespace AgulhasMimos;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductGroup extends Model
+class ProductCategory extends Model
 {
-    protected $primaryKey = 'ID_GROUP';
     public $timestamps = false;
 
     public function __construct($attributes = array(), $name = null, $description = null)
@@ -15,8 +14,8 @@ class ProductGroup extends Model
         if(!is_null($name) && !empty($name))
         {
             $this->validateName($name);
-            $this->NAM_GROUP = $name;
-            $this->updateGroup($description);
+            $this->name = $name;
+            $this->updateCategory($description);
         }
     }
 
@@ -24,26 +23,25 @@ class ProductGroup extends Model
     {
         if(!is_null($name) && !empty($name))
         {
-            $group = ProductGroup::GetByName($name);
+            $group = ProductCategory::GetByName($name);
             if(!is_null($group))
             {
-                throw Exception("Já existe produto com nome ".$name);
+                throw Exception("Já existe categoria com nome ".$name);
             }
         }
     }
 
-    private function updateGroup($description)
+    private function updateCategory($description)
     {
-        $this->DES_GROUP = $description;
-        $this->IS_ACTIVE = true;
-        $this->DT_LAST_MODIFICATION = date('Y-m-d H:i:s');
+        $this->description = $description;
+        $this->dt_last_modification = date('Y-m-d H:i:s');
     }
 
     public static function GetById($id)
     {
         if(!is_null($id))
         {
-            return ProductGroup::find($id);
+            return ProductCategory::find($id);
         }
     }
 
@@ -51,31 +49,31 @@ class ProductGroup extends Model
     {
         if(!is_null($name) && !empty($name))
         {
-            return ProductGroup::where('NAM_GROUP', $name)->first();
+            return ProductCategory::where('name', $name)->first();
         }
     }
 
     public static function ListAll()
     {
-        return ProductGroup::all();
+        return ProductCategory::all();
     }
 
     public static function CreateOrUpdate($id, $name, $description)
     {
-        $group = ProductGroup::GetById($id);
+        $category = ProductCategory::GetById($id);
 
-        if(is_null($group))
+        if(is_null($category))
         {
-            $group = new ProductGroup($attributes = array(), $name, $description);
+            $category = new ProductCategory($attributes = array(), $name, $description);
         }
         else
         {
-            $group->updateGroup($description);
+            $category->updateCategory($description);
         }
-        return $group;
+        return $category;
     }
 
-    public function deleteGroup()
+    public function deleteCategory()
     {
         $this->delete();
     }

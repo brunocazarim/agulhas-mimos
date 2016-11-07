@@ -177,16 +177,6 @@ body {
 /* CUSTOMIZE BUTTONS
 -------------------------------------------------- */
 
-.btn-login {
-  color: #993300;
-  background-color: #fff;
-  border-color: #fff;
-}
-.btn-login:hover {
-  color: #331100;
-  background-color: #b3b3b3;
-  border-color: #b3b3b3;
-}
 .btn-custom {
   color: #993300;
   background-color: #fff;

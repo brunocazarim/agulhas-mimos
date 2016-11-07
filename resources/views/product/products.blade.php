@@ -12,18 +12,18 @@
         <table class="table table-striped">
             @foreach ($products as $product)
             <tr class="lead">
-                <td>{{$product->COD_PRODUCT}}</td>
-                <td>{{$product->NAM_PRODUCT}}</td>
-                <td>{{$product->DETAILS_PRODUCT}}</td>
-                <td>{{$product->PRICE}}</td>
+                <td>{{$product->code}}</td>
+                <td>{{$product->name}}</td>
+                <td>{{$product->description}}</td>
+                <td>{{$product->price}}</td>
                 <td>
-                    <a href="/products/edit/{{$product->ID_PRODUCT}}">
+                    <a href="/products/edit/{{$product->id}}">
                         <span class="glyphicon glyphicon-edit"></span>
                     </a>
                 </td>
                 <td>
                     <form method="delete">
-                        <a href="/products/delete?id={{$product->ID_PRODUCT}}">
+                        <a href="/products/delete?id={{$product->id}}">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </form>
