@@ -5,15 +5,22 @@ namespace AgulhasMimos\Http\Controllers;
 use Request;
 use AgulhasMimos\Http\Requests\ProductRequest;
 use AgulhasMimos\Http\Requests\ProductCategoryRequest;
-use AgulhasMimos\Product as Product;
-use AgulhasMimos\ProductCategory as ProductCategory;
+use AgulhasMimos\Models\Product as Product;
+use AgulhasMimos\Repositories\ProductRepository as ProductRepository;
+use AgulhasMimos\Models\ProductCategory as ProductCategory;
 
 class ProductsController extends Controller
 {
+    private $products;
+
+    public function __constructor(ProductRepository $products)
+    {
+        $this->products = $products;
+    }
+
     public function listAllProducts()
     {
-        $products = Product::ListAll();
-        return view('product.products')->with('products', $products);
+        return view('product.products')->with('products', $this->products->all());
     }
 
     public function getProduct($id)
